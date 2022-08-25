@@ -16,7 +16,10 @@
     <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="ù
+
+
+    /docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
@@ -96,9 +99,15 @@
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class=" py-2">
+                <input type="username" class="form-control" id="floatingUsername" placeholder="nameexample19">
+                <label for="floatingInput">Username</label>
+            </div>
+
+            <div class=" py-2">
                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
+
             <div class=" py-2">
                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
@@ -110,7 +119,7 @@
     </main>
 
     <footer class="mt-auto text-white-50">
-        <p>Il progetto &egrave reperibile a questo link: <a href="https://github.com/MurielRossi/progettoTSW" class="text-white">progettoTSW</a></p>
+        <p>Il progetto &egrave rep mnjui87eribile a questo link: <a href="https://github.com/MurielRossi/progettoTSW" class="text-white">progettoTSW</a></p>
         <p>Autrice: <a href="https://github.com/MurielRossi" class="text-white">Muriel Rossi</a></p>
 
     </footer>

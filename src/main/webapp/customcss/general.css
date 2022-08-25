@@ -4,6 +4,14 @@ nav
     background-color: #1b1e21;
 }
 
+textarea
+{
+    padding: 5px;
+    rows: 4;
+    resize: none;
+    border-radius: 3px;
+}
+
 
 
 
