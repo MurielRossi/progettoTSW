@@ -1,16 +1,122 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lethal Muriel
-  Date: 23/08/2022
-  Time: 18:54
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
 <head>
-    <title>Title</title>
+    <meta charset="utf-32">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Muriel Rossi">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Login</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
+
+
+
+
+    <!--<link rel="stylesheet" href="./customcss/general.css"/>
+    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+    /docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+    <meta name="theme-color" content="#712cf9">
+
+
+    <style>
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            /*flex-wrap: nowrap;*/
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
 </head>
-<body>
+<body class="d-flex h-100 text-center text-bg-dark">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-2 px-5">Login</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end align-items-center">
+                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="#">Home</a>
+                <a class="nav-link fw-bold py-1 px-3" href="#">Features</a>
+                <a class="nav-link fw-bold py-1 px-3" href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="w-100 align-items-center">
+        <form class="w-50 align-items-center " style="display: inline-block;">
+            <img class="mb-4" src="./images/fairytale.png" alt="" width="86" height="70">
+            <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+
+
+            <div class=" py-2">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Email address</label>
+            </div>
+
+            <div class=" py-2">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">Storytelling</p>
+        </form>
+    </main>
+
+    <footer class="mt-auto text-white-50">
+        <p>Il progetto &egrave rep mnjui87eribile a questo link: <a href="https://github.com/MurielRossi/progettoTSW" class="text-white">progettoTSW</a></p>
+        <p>Autrice: <a href="https://github.com/MurielRossi" class="text-white">Muriel Rossi</a></p>
+
+    </footer>
+</div>
 
 </body>
-</html>
