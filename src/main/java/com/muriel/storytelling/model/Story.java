@@ -1,4 +1,8 @@
-package model;
+package com.muriel.storytelling.model;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class Story implements Serializable
 {
@@ -11,8 +15,8 @@ public class Story implements Serializable
 
     @Override
     public boolean equals(Object o) {
-        Storia storia = (Storia) o;
-        return id == storia.id && nReazioni == storia.nReazioni && username.equals(storia.username) && contenuto.equals(storia.contenuto) && Objects.equals(dataCreazione, storia.dataCreazione);
+        Story story = (Story) o;
+        return id == story.id && nReazioni == story.nReazioni && username.equals(story.username) && contenuto.equals(story.contenuto) && Objects.equals(dataCreazione, story.dataCreazione);
     }
 
 
@@ -56,7 +60,7 @@ public class Story implements Serializable
         this.id = id;
     }
 
-    public Storia(){
+    public Story() {
 
     }
 

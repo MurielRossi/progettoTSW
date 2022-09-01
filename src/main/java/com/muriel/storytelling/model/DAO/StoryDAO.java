@@ -1,5 +1,12 @@
-package DAO;
+package com.muriel.storytelling.model.DAO;
 
+
+import com.muriel.storytelling.DB.ConnPool;
+import com.muriel.storytelling.model.Story;
+
+import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class StoryDAO
 {
@@ -31,7 +38,7 @@ public class StoryDAO
         } finally {
             try {
                 ps.close();
-                ConnectionPool.releaseConnection(conn);
+                ConnPool.releaseConnection(conn);
             } catch (SQLException e) {
             // Auto-generated catch block
                 e.printStackTrace();
@@ -71,7 +78,7 @@ public class StoryDAO
         } finally {
             try {
                 ps.close();
-                ConnectionPool.releaseConnection(conn);
+                ConnPool.releaseConnection(conn);
             } catch (SQLException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
@@ -81,7 +88,7 @@ public class StoryDAO
         return stories;
 
     }
-
+/*
     public ArrayList<Story> getStoriesByDate(LocalDate dataCreazione)
     {
         ArrayList<Story> stories = new ArrayList<Story>();
@@ -91,7 +98,7 @@ public class StoryDAO
         try{
             conn = ConnPool.getConnection();
             String sql = "SELECT * FROM Story WHERE dataCreazione =?";
-            ps.setDate(1,dataCreazione);
+            ps.setDate(1, dataCreazione);
 
             ps = conn.prepareStatement(sql);
             ps.executeQuery();
@@ -113,7 +120,7 @@ public class StoryDAO
         } finally {
             try {
                 ps.close();
-                ConnectionPool.releaseConnection(conn);
+                ConnPool.releaseConnection(conn);
             } catch (SQLException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
@@ -123,7 +130,7 @@ public class StoryDAO
         return stories;
 
     }
-
+*/
     public Story getStoryByID(int id)
     {
         Story story = new Story();
@@ -150,7 +157,7 @@ public class StoryDAO
         } finally {
             try {
                 ps.close();
-                ConnectionPool.releaseConnection(conn);
+                ConnPool.releaseConnection(conn);
             } catch (SQLException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
@@ -162,17 +169,16 @@ public class StoryDAO
 
     public void saveStory(Story story)
     {
-        Story story = new Story();
         Connection conn = null;
         PreparedStatement ps = null;
 
         try{
-            Connection conn = ConnPool.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT into storia (username,contenuto,nReazioni,dataCreazione) values (?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            conn = ConnPool.getConnection();
+            ps = conn.prepareStatement("INSERT into storia (username,contenuto,nReazioni,dataCreazione) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, story.getUsername());
             ps.setString(2, story.getContenuto());
             ps.setInt(3,story.getNReazioni());
-            ps.setDate(4, Date.valueOf(storia.getDataCreazione()));
+            ps.setDate(4, Date.valueOf(story.getDataCreazione()));
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
@@ -185,14 +191,12 @@ public class StoryDAO
         } finally {
             try {
                 ps.close();
-                ConnectionPool.releaseConnection(conn);
+                ConnPool.releaseConnection(conn);
             } catch (SQLException e) {
                 // Auto-generated catch block
                 e.printStackTrace();
             }
         }
-
-        return story;
     }
 
    // public void deleteStory(Story story)

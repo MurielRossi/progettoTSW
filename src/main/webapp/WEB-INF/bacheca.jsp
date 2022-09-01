@@ -12,7 +12,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
     <!-- Bootstrap core CSS -->
-    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -243,7 +243,7 @@
                 </td>
                 <td style="width:5%; height: 100%">
                     <button class="btn btn-lg btn-primary btn-block" style="width: 100%; height: 100%" type="submit" id = "submit-button">
-                        <img class="mb-4" src="./images/publish.png" alt="" width="40" height="40">
+                        <img class="mb-4" src="../images/publish.png" alt="" width="40" height="40">
                     </button>
                 </td>
             </tr>
@@ -259,7 +259,7 @@
             <a href="#">Back to top</a>
         </p>
         <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        <p>New to Bootstrap? <a href="..">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
     </div>
 </footer>
 
@@ -267,13 +267,18 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="./bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
-<script src="./bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
-<script src="./bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
+<script>window.jQuery || document.write('<script src="../bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
+<script src="../bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+<script src="../bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
 
 
 <svg xmlns="http://www.w3.org/2000/svg" width="449" height="225" viewBox="0 0 449 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="22" style="font-weight:bold;font-size:22pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
-</body>
 
+<c:forEach items="${stories}" var="story">
+    <p> <c:out value = "${story.text}"> </c:out></p>
+</c:forEach>
+
+
+</body>
 </html>
