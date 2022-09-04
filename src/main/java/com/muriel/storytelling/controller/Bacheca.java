@@ -34,11 +34,12 @@ public class Bacheca extends HttpServlet
         StoryDAO dao = new StoryDAO();
         UserDAO uD = new UserDAO();
 
-        User u = new User("gigino","ciao","email");
-        User ciao = new User("muriella","srtfhd","adrth");
-        User hello = new User("simoncino","sxthyyfd","sxdruuh");
-        User jh = new User("peppino","jyuhtgf","tyud");
-        User tfd = new User("carola","hbtgd","htgf");
+        User u = new User("gigino","ciao","email", false);
+        User ciao = new User("muriella","srtfhd","adrth", false);
+        User hello = new User("simoncino","sxthyyfd","sxdruuh", false);
+        User jh = new User("peppino","jyuhtgf","tyud", false);
+        User tfd = new User("carola","hbtgd","htgf", false);
+
 
 
         Story s = new Story("gigino","a fess e sort",43, LocalDate.now());
@@ -59,6 +60,7 @@ public class Bacheca extends HttpServlet
         dao.saveStory(f);
         dao.saveStory(h);
 
+
         ArrayList<Story> stories = null;
         try {
             stories = dao.getAllStories();
@@ -71,6 +73,8 @@ public class Bacheca extends HttpServlet
         System.out.println(stories);
         request.setAttribute("stories", stories);
 
+        //request.getSession().setAttribute("u", "true");
+        request.getSession().setAttribute("user", "u");
         RequestDispatcher disp = request.getRequestDispatcher("WEB-INF/bacheca.jsp");
         disp.forward(request, response);
 

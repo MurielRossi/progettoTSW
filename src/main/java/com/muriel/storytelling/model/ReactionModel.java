@@ -2,9 +2,7 @@ package com.muriel.storytelling.model;
 
 import java.io.Serializable;
 
-
-
-public class Reaction implements Serializable {
+public class ReactionModel implements Serializable {
     public int getIdStoria() {
         return idStoria;
     }
@@ -21,11 +19,17 @@ public class Reaction implements Serializable {
         this.emailUtente = emailUtente;
     }
 
+    public ReactionModel(int idStoria, String emailUtente) {
+        this.idStoria = idStoria;
+        this.emailUtente = emailUtente;
+    }
 
+    public ReactionModel() {
+    }
 
     @Override
     public boolean equals(Object o) {
-        Reaction reaction = (Reaction) o;
+        ReactionModel reaction = (ReactionModel) o;
         return idStoria == reaction.idStoria && emailUtente.equals(reaction.emailUtente);
     }
 

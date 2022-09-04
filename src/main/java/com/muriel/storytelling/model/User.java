@@ -10,16 +10,18 @@ public class User implements Serializable
     private String email;
     private String password;
     private String username;
+    private boolean isAdmin;
     @Override
     public boolean equals(Object o) {
         User user = (User) o;
-        return email.equals(user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username);
+        return email.equals(user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username)&& isAdmin == user.isAdmin;
     }
 
-    public User(String username, String password,String email) {
+    public User(String username, String password,String email, boolean isAdmin) {
         this.password = password;
         this.username = username;
         this.email = email;
+        this.isAdmin = isAdmin;
     }
 
     public User() {
@@ -48,4 +50,13 @@ public class User implements Serializable
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
 }

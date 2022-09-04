@@ -11,4 +11,12 @@
         <servlet-name>Bacheca</servlet-name>
         <url-pattern>/Bacheca</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Reaction</servlet-name>
+        <servlet-class>com.muriel.storytelling.controller.Reaction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Reaction</servlet-name>
+        <url-pattern>/Reaction</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -86,6 +86,37 @@ public class StoryDAO
         return stories;
 
     }
+
+    public int getReactionByID(int idStoria) throws SQLException {
+
+        Connection conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Story WHERE id =?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        int nReazioni = -1;
+
+        try{
+            ps.executeQuery();
+            ResultSet rs = ps.getResultSet();
+
+            ps.setInt(1,idStoria);
+
+            nReazioni = rs.getInt("nReazioni");
+        }
+        catch (SQLException e) {
+            // Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                ConnPool.releaseConnection(conn);
+            } catch (SQLException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return nReazioni;
+    }
 /*
     public ArrayList<Story> getStoriesByDate(LocalDate dataCreazione)
     {

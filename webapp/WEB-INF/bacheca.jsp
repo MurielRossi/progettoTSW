@@ -112,6 +112,33 @@
     </div>
 </div>
 
+ <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+     <div id="succesReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+             <img src="..." class="rounded me-2" alt="...">
+             <strong class="me-auto">Bootstrap</strong>
+             <small>11 mins ago</small>
+             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+             Reazione aggiunta correttamente.
+         </div>
+     </div>
+ </div>
+
+ <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+     <div id="failureReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+             <img src="..." class="rounded me-2" alt="...">
+             <strong class="me-auto">Bootstrap</strong>
+             <small>11 mins ago</small>
+             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+             Non è stato possibile aggiungere la reazione.
+         </div>
+     </div>
+ </div>
 
 <div class="navbar navbar-dark bg-dark fixed-bottom align-content-center">
     <form class = "PubblicaStoria" style="display: inline-block; width: 95%" action="./PubblicaStoria" method="post" onsubmit="return validateData()" style="display: block" aria-multiline="true" text-indent = "initial">
@@ -147,8 +174,8 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="./bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
 <script src="./bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
 <script src="./bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
@@ -157,49 +184,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="449" height="225" viewBox="0 0 449 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="22" style="font-weight:bold;font-size:22pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
 
 <script>
-
-    // function addReaction(){
-    //     menuBttn.addEventListener('click', menuBttnToggle);
-    //
-    //     /* REACTIONS ACTIVATION */
-    //     // Get all "REACTIONS" elements
-    //     const reactionsLinks = Array.prototype.slice.call(document.querySelectorAll('.menuBttn__link'), 0);
-    //
-    //     // Check if there are any navbar burgers
-    //     if (reactionsLinks.length > 0) {
-    //
-    //         // Add a click event on each of them
-    //         reactionsLinks.forEach(function(reactionLink) {
-    //             reactionLink.addEventListener('click', function() {
-    //                 const story = document.querySelector("article")
-    //                 const reactionName = reactionLink.getAttribute("name")
-    //                 const storyID = story.dataset.storyid;
-    //
-    //                 console.log(reactionName)
-    //                 console.log(storyID)
-    //                 sendReaction(reactionName,storyID)
-    //             });
-    //         });
-    //
-    //     }
-    // }
-
     function sendReaction(storyID){
-        console.log(storyID);
         $.post("Reaction",
             {
                 storyId: storyID,
             },
-            // function(msg){
-            //     bulmaToast.toast({ message: msg, dismissible: true, pauseOnHover: true})
-            // }
-        }
+             function(msg){
+                 var toastSuccess = document.getElementById('succesReaction')
+                 var toast = new bootstrap.Toast(toastSuccess)
+                 toast.show()
+             }).fail(function(msg){
 
-    function updateReactionButton(storyID,newCount){
-
+        })
     }
-
-
 
 </script>
 

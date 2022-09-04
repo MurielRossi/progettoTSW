@@ -26,6 +26,8 @@ public class UserDAO
                 user.setEmail(rs.getString("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setIsAdmin(rs.getBoolean("isAdmin"));
+
                 users.add(user);
             }
         }
@@ -54,7 +56,7 @@ public class UserDAO
 
         try{
             conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM Utente WHERE username =? AND password =??";
+            String sql = "SELECT * FROM Utente WHERE username =? AND password =?";
             ps.setString(1,username);
             ps.setString(2,password);
 
@@ -66,6 +68,8 @@ public class UserDAO
                 user.setEmail(rs.getString("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
+                user.setIsAdmin(rs.getBoolean("isAdmin"));
+
                 users.add(user);
             }
         }
@@ -92,10 +96,12 @@ public class UserDAO
         Connection conn = null;
         try{
             conn = ConnPool.getConnection();
-            ps = conn.prepareStatement("INSERT into Utente (username,email, password) values (?,?,?)");
+            ps = conn.prepareStatement("INSERT into Utente (username,email, password, isAdmin) values (?,?,?,?)");
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getEmail());
             ps.setString(3,user.getPassword());
+            ps.setBoolean(4,user.getIsAdmin());
+
             ps.executeUpdate();
         }
         catch (SQLException e) {
