@@ -17,13 +17,13 @@ public class UserDAO
 
         try{
             conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM User";
+            String sql = "SELECT * FROM Utente";
             ps = conn.prepareStatement(sql);
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getString("id"));
+                user.setEmail(rs.getString("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 users.add(user);
@@ -54,7 +54,7 @@ public class UserDAO
 
         try{
             conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM User WHERE username =? AND password =??";
+            String sql = "SELECT * FROM Utente WHERE username =? AND password =??";
             ps.setString(1,username);
             ps.setString(2,password);
 
@@ -63,7 +63,7 @@ public class UserDAO
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getString("id"));
+                user.setEmail(rs.getString("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 users.add(user);
@@ -92,15 +92,11 @@ public class UserDAO
         Connection conn = null;
         try{
             conn = ConnPool.getConnection();
-            ps = conn.prepareStatement("INSERT into user (id, username, password) values (?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getId());
-            ps.setString(2, user.getUsername());
+            ps = conn.prepareStatement("INSERT into Utente (username,email, password) values (?,?,?)");
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getEmail());
             ps.setString(3,user.getPassword());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            user.setId(rs.getString(1));
-
         }
         catch (SQLException e) {
             // Auto-generated catch block

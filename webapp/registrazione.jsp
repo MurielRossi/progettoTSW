@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="Muriel Rossi">
     <meta name="generator" content="Hugo 0.101.0">
-    <title>Login</title>
+    <title>Registrazione</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
 
@@ -82,7 +82,7 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
         <div>
-            <h3 class="float-md-start mb-2 px-5">Login</h3>
+            <h3 class="float-md-start mb-2 px-5">Registrazione</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end align-items-center">
                 <a class="nav-link fw-bold  px-3 active " aria-current="page" href="#">Home</a>
                 <a class="nav-link fw-bold py-1 px-3" href="#">Features</a>
@@ -94,16 +94,20 @@
     <main class="w-100 align-items-center">
         <form class="w-50 align-items-center " style="display: inline-block;">
             <img class="mb-4" src="./images/fairytale.png" alt="" width="86" height="70">
-            <h1 class="h3 mb-3 fw-normal">Please log in</h1>
-
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class=" py-2">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input type="username" class="form-control" email="floatingUsername" placeholder="nameexample19">
+                <label for="floatingInput">Username</label>
+            </div>
+
+            <div class=" py-2">
+                <input type="email" class="form-control" email="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
 
             <div class=" py-2">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input type="password" class="form-control" email="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
 

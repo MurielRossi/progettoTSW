@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: Lethal Muriel
-Build-Jdk: Oracle OpenJDK version 15
+Built-By: luigibarbato
+Build-Jdk: Azul Zulu version 15.0.8
 

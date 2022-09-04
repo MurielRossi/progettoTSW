@@ -7,18 +7,23 @@ import java.util.Objects;
 
 public class User implements Serializable
 {
-    private String id;
+    private String email;
     private String password;
     private String username;
-
-
-
     @Override
     public boolean equals(Object o) {
         User user = (User) o;
-        return id.equals(user.id) && Objects.equals(password, user.password) && Objects.equals(username, user.username);
+        return email.equals(user.email) && Objects.equals(password, user.password) && Objects.equals(username, user.username);
     }
 
+    public User(String username, String password,String email) {
+        this.password = password;
+        this.username = username;
+        this.email = email;
+    }
+
+    public User() {
+    }
 
     public String getUsername() {
         return username;
@@ -28,7 +33,6 @@ public class User implements Serializable
         this.username = username;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -37,11 +41,11 @@ public class User implements Serializable
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -16,8 +16,6 @@
     <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="apple-touch-icon" href="ù
-
 
     /docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
     <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">

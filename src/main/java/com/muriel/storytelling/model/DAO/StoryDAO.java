@@ -10,16 +10,14 @@ import java.util.ArrayList;
 
 public class StoryDAO
 {
-    public ArrayList<Story> getAllStories()
-    {
+    public ArrayList<Story> getAllStories() throws SQLException {
         ArrayList<Story> stories = new ArrayList<Story>();
-        Connection conn = null;
-        PreparedStatement ps = null;
+
+        Connection conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Storia";
+        PreparedStatement ps = conn.prepareStatement(sql);
 
         try{
-            conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM Story";
-            ps = conn.prepareStatement(sql);
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
@@ -56,7 +54,7 @@ public class StoryDAO
 
         try{
             conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM Story WHERE username =?";
+            String sql = "SELECT * FROM Storia WHERE username =?";
             ps.setString(1,username);
 
             ps = conn.prepareStatement(sql);
@@ -105,7 +103,7 @@ public class StoryDAO
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
                 Story story = new Story();
-                story.setId(rs.getInt("id"));
+                story.setEmail(rs.getInt("id"));
                 story.setUsername(rs.getString("username"));
                 story.setContenuto(rs.getString("contenuto"));
                 story.setNReazioni(rs.getInt("nReazioni"));
@@ -174,11 +172,12 @@ public class StoryDAO
 
         try{
             conn = ConnPool.getConnection();
-            ps = conn.prepareStatement("INSERT into storia (username,contenuto,nReazioni,dataCreazione) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement("INSERT into storia (username,contenuto,nReazioni,nCommenti,dataCreazione) values (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, story.getUsername());
             ps.setString(2, story.getContenuto());
             ps.setInt(3,story.getNReazioni());
-            ps.setDate(4, Date.valueOf(story.getDataCreazione()));
+            ps.setInt(4,0);
+            ps.setDate(5, Date.valueOf(story.getDataCreazione()));
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();

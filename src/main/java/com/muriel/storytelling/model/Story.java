@@ -64,6 +64,12 @@ public class Story implements Serializable
 
     }
 
+    public Story(String username, String contenuto, int nReazioni, LocalDate dataCreazione) {
+        this.username = username;
+        this.contenuto = contenuto;
+        this.nReazioni = nReazioni;
+        this.dataCreazione = dataCreazione;
+    }
 }
 
 
