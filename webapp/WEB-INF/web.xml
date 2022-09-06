@@ -27,4 +27,32 @@
         <servlet-name>Story</servlet-name>
         <url-pattern>/Story</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SalvaPost</servlet-name>
+        <servlet-class>com.muriel.storytelling.controller.SalvaPost</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SalvaPost</servlet-name>
+        <url-pattern>/SalvaPost</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PostSalvati</servlet-name>
+        <servlet-class>com.muriel.storytelling.controller.PostSalvati</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostSalvati</servlet-name>
+        <url-pattern>/PostSalvati</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/errore.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/errore.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/errore.jsp</location>
+    </error-page>
 </web-app>

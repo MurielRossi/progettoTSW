@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -20,8 +21,15 @@ public class Story extends HttpServlet
         StoryDAO storyDao = new StoryDAO();
         StoryModel story = new StoryModel();
 
-//        Prendo l'utente dalla attuale sessione per avere le informazioni necessarie come l'email
-        User user = (User) request.getSession().getAttribute("user");
+        HttpSession sessione = request.getSession(false);
+
+        if(sessione == null)
+        {
+            response.setStatus(403); //gli errori 400 in generale sono errori di errata richiesta, in particolare il 403 è il "divieto di accesso", ovvero forbidden
+            return;
+        }
+        //Prendo l'utente dalla attuale sessione per avere le informazioni necessarie come l'email
+        User user = (User) sessione.getAttribute("user");
 
 //        Ottengo il contenuto della storia che l'utente ha chiesto di pubblicare
         story.setContenuto(request.getParameter("contenuto"));

@@ -159,18 +159,17 @@ public class StoryDAO
 
     }
 */
-    public StoryModel getStoryByID(int id)
-    {
+    public StoryModel getStoryByID(int id) throws SQLException {
         StoryModel story = new StoryModel();
         Connection conn = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
+        conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Story WHERE id =?";
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1,id);
 
         try{
-            conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM Story WHERE id =?";
-            ps.setInt(1,id);
 
-            ps = conn.prepareStatement(sql);
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             story.setUsername(rs.getString("username"));

@@ -10,15 +10,12 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.icons">
 
-    <title>Album example for Bootstrap</title>
+    <title>Bacheca</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
-    <!-- Bootstrap core CSS -->
-<%--    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <!-- Custom styles for this template -->
      <link href="./customcss/general.css" rel="stylesheet">
 
  </head>
@@ -77,6 +74,37 @@
     </div>
 </div>
 <%-- FINE TOASTS STORY--%>
+
+<%-- INIZIO TOASTS SALVASTORIA--%>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="successSave" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Ok!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Storia salvata correttamente.
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="failureSave" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <span>⚠️ </span>
+            <strong class="me-auto">Ops!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Non è stato possibile salvare la storia.
+        </div>
+    </div>
+</div>
+
+<%-- FINE TOASTS SALVASTORIA--%>
+
+
  <header>
      <div class="bg-dark collapse show" email="navbarHeader" style="">
          <div class="container">
@@ -87,7 +115,7 @@
                  <div class="col-sm-4 offset-md-1 py-4">
                      <h4 class="text-white">Azioni</h4>
                      <ul class="list-unstyled">
-                         <li><a href="#" class="text-white">Storie salvate</a></li>
+                         <li><a href="${pageContext.request.contextPath}/PostSalvati" class="text-white">Storie salvate</a></li>
                          <li><a href="#" class="text-white">Disconnettimi</a></li>
                          <li><a href="#" class="text-white">Elimina il mio account</a></li>
                      </ul>
@@ -189,15 +217,7 @@
     </div>
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<%-- <script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>--%>
-<%--<script src="./bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>--%>
-<%--<script src="./bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>--%>
-<%--<script src="./bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>--%>
-
 
 <svg xmlns="http://www.w3.org/2000/svg" width="449" height="225" viewBox="0 0 449 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="22" style="font-weight:bold;font-size:22pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
 
@@ -240,12 +260,12 @@
     }
 
     function sendPost(storyID){
-        $.post("Story",
+        $.post("SalvaPost",
             {
                 storyId: storyID,
             },
             function(msg){
-                var toastSuccess = document.getElementById('succesSave')
+                var toastSuccess = document.getElementById('successSave')
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
             })

@@ -72,7 +72,6 @@ public class Bacheca extends HttpServlet
         System.out.println(stories);
         request.setAttribute("stories", stories);
 
-        //request.getSession().setAttribute("u", "true");
         request.getSession().setAttribute("user", u);
         RequestDispatcher disp = request.getRequestDispatcher("WEB-INF/bacheca.jsp");
         disp.forward(request, response);
