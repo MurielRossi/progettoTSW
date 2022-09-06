@@ -2,14 +2,13 @@ package com.muriel.storytelling.controller;
 
 import com.muriel.storytelling.model.DAO.StoryDAO;
 import com.muriel.storytelling.model.DAO.UserDAO;
-import com.muriel.storytelling.model.Story;
+import com.muriel.storytelling.model.StoryModel;
 import com.muriel.storytelling.model.User;
 
 import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,11 +41,11 @@ public class Bacheca extends HttpServlet
 
 
 
-        Story s = new Story("gigino","a fess e sort",43, LocalDate.now());
-        Story t = new Story("muriella","a fess e mammt",43, LocalDate.now());
-        Story g = new Story("simoncino","a fess e nonnt",43, LocalDate.now());
-        Story f = new Story("peppino","a fess e zitt",43, LocalDate.now());
-        Story h = new Story("carola","a fess e bast",43, LocalDate.now());
+        StoryModel s = new StoryModel("gigino","a fess e sort",43, LocalDate.now());
+        StoryModel t = new StoryModel("muriella","a fess e mammt",43, LocalDate.now());
+        StoryModel g = new StoryModel("simoncino","a fess e nonnt",43, LocalDate.now());
+        StoryModel f = new StoryModel("peppino","a fess e zitt",43, LocalDate.now());
+        StoryModel h = new StoryModel("carola","a fess e bast",43, LocalDate.now());
         uD.saveUser(u);
         uD.saveUser(ciao);
         uD.saveUser(hello);
@@ -61,7 +60,7 @@ public class Bacheca extends HttpServlet
         dao.saveStory(h);
 
 
-        ArrayList<Story> stories = null;
+        ArrayList<StoryModel> stories = null;
         try {
             stories = dao.getAllStories();
         } catch (SQLException e) {
@@ -74,7 +73,7 @@ public class Bacheca extends HttpServlet
         request.setAttribute("stories", stories);
 
         //request.getSession().setAttribute("u", "true");
-        request.getSession().setAttribute("user", "u");
+        request.getSession().setAttribute("user", u);
         RequestDispatcher disp = request.getRequestDispatcher("WEB-INF/bacheca.jsp");
         disp.forward(request, response);
 

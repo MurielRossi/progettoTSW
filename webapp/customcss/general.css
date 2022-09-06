@@ -12,6 +12,16 @@ textarea
     border-radius: 3px;
 }
 
+table
+{
+    display: inline-block;
+}
+
+#scriviStoria /* cancelletto per gli id e . per le classi*/
+{
+    margin: auto;
+    width: 50%;
+}
 
 
 

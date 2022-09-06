@@ -9,16 +9,16 @@ import java.util.ArrayList;
 
 public class UserDAO
 {
-    public ArrayList<User> getAllUsers()
-    {
+    public ArrayList<User> getAllUsers() throws SQLException {
         ArrayList<User> users = new ArrayList<User>();
         Connection conn = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps;
+        conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Utente";
+        ps = conn.prepareStatement(sql);
 
         try{
-            conn = ConnPool.getConnection();
-            String sql = "SELECT * FROM Utente";
-            ps = conn.prepareStatement(sql);
+
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {

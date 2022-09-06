@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Story implements Serializable
+public class StoryModel implements Serializable
 {
     private int id;
     private String username;
@@ -15,7 +15,7 @@ public class Story implements Serializable
 
     @Override
     public boolean equals(Object o) {
-        Story story = (Story) o;
+        StoryModel story = (StoryModel) o;
         return id == story.id && nReazioni == story.nReazioni && username.equals(story.username) && contenuto.equals(story.contenuto) && Objects.equals(dataCreazione, story.dataCreazione);
     }
 
@@ -60,11 +60,11 @@ public class Story implements Serializable
         this.id = id;
     }
 
-    public Story() {
+    public StoryModel() {
 
     }
 
-    public Story(String username, String contenuto, int nReazioni, LocalDate dataCreazione) {
+    public StoryModel(String username, String contenuto, int nReazioni, LocalDate dataCreazione) {
         this.username = username;
         this.contenuto = contenuto;
         this.nReazioni = nReazioni;

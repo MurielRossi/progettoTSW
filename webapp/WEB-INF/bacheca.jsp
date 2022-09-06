@@ -15,27 +15,81 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
     <!-- Bootstrap core CSS -->
-    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<%--    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <!-- Custom styles for this template -->
-    <!-- <link href="album.css" rel="stylesheet"> -->
+     <link href="./customcss/general.css" rel="stylesheet">
+
  </head>
  <body>
+<%-- INIZIO TOASTS REACTIONS--%>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+     <div id="succesReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+             <img src="..." class="rounded me-2" alt="...">
+             <strong class="me-auto">Ok!</strong>
+             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+             Reazione aggiunta correttamente.
+         </div>
+     </div>
+ </div>
 
+ <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+     <div id="failureReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+         <div class="toast-header">
+             <span>⚠️ </span>
+             <strong class="me-auto">Ops!</strong>
+             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body">
+             Non è stato possibile aggiungere la reazione.
+         </div>
+     </div>
+ </div>
+<%-- FINE TOASTS REACTIONS--%>
+<%-- INIZIO TOASTS STORY--%>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="successStory" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Ok!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Storia aggiunta correttamente.
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="failureStory" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <span>⚠️ </span>
+            <strong class="me-auto">Ops!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Non è stato possibile aggiungere la storia.
+        </div>
+    </div>
+</div>
+<%-- FINE TOASTS STORY--%>
  <header>
      <div class="bg-dark collapse show" email="navbarHeader" style="">
          <div class="container">
              <div class="row">
                  <div class="col-sm-8 col-md-7 py-4">
-                     <h4 class="text-white">About</h4>
-                     <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+                     <h4 class="text-white">Ciao </h4>
                  </div>
                  <div class="col-sm-4 offset-md-1 py-4">
-                     <h4 class="text-white">Contact</h4>
+                     <h4 class="text-white">Azioni</h4>
                      <ul class="list-unstyled">
-                         <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                         <li><a href="#" class="text-white">Like on Facebook</a></li>
-                         <li><a href="#" class="text-white">Email me</a></li>
+                         <li><a href="#" class="text-white">Storie salvate</a></li>
+                         <li><a href="#" class="text-white">Disconnettimi</a></li>
+                         <li><a href="#" class="text-white">Elimina il mio account</a></li>
                      </ul>
                  </div>
              </div>
@@ -79,6 +133,7 @@
                                  <div class="d-flex justify-content-between align-items-center">
                                      <div class="btn-group">
                                          <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendReaction(this.value)"> <c:out value = "${story.NReazioni}"> </c:out> ❤️</button>
+                                         <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendPost(this.value)">❤️</button>
                                      </div>
                                      <small class="text-muted"><c:out value = "${story.dataCreazione}"> </c:out></small>
                                  </div>
@@ -89,7 +144,6 @@
                  </div>
          </div>
      </div>
-
  </main>
  <!-- QUESTA E' LA NAVBAR DI SOTTO -->
 
@@ -97,68 +151,33 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
-                <h4 class="text-white">About</h4>
                 <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
-                <h4 class="text-white">Contact</h4>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                    <li><a href="#" class="text-white">Like on Facebook</a></li>
-                    <li><a href="#" class="text-white">Email me</a></li>
+
                 </ul>
             </div>
         </div>
     </div>
 </div>
 
- <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-     <div id="succesReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-         <div class="toast-header">
-             <img src="..." class="rounded me-2" alt="...">
-             <strong class="me-auto">Bootstrap</strong>
-             <small>11 mins ago</small>
-             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-         </div>
-         <div class="toast-body">
-             Reazione aggiunta correttamente.
-         </div>
-     </div>
- </div>
-
- <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-     <div id="failureReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-         <div class="toast-header">
-             <img src="..." class="rounded me-2" alt="...">
-             <strong class="me-auto">Bootstrap</strong>
-             <small>11 mins ago</small>
-             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-         </div>
-         <div class="toast-body">
-             Non è stato possibile aggiungere la reazione.
-         </div>
-     </div>
- </div>
-
 <div class="navbar navbar-dark bg-dark fixed-bottom align-content-center">
-    <form class = "PubblicaStoria" style="display: inline-block; width: 95%" action="./PubblicaStoria" method="post" onsubmit="return validateData()" style="display: block" aria-multiline="true" text-indent = "initial">
+    <div class="container" id = "scriviStoria">
         <table>
             <tr>
                 <td style="width: 95%">
-
                     <textarea email="contenuto" name="contenuto" style="width: 100%; padding: 5px" rows="4" placeholder="Scrivi la tua storia..."></textarea>
                     <span email="lenght-alert" class="alert-info " hidden>Questa storia non ha il numero adeguato di caratteri!</span>
                 </td>
                 <td style="width:5%; height: 100%">
-                    <button class="btn btn-lg btn-primary btn-block" style="width: 100%; height: 100%" type="submit" email = "submit-button">
-                        <img class="mb-4" src="../images/publish.png" alt="" width="40" height="40">
+                    <button class="btn btn-lg btn-primary btn-block" style="width: 100%; height: 100%"  onclick="sendStory()">
+                        <img class="mb-4" src="./images/publish.png" alt="" width="40" height="40">
                     </button>
                 </td>
             </tr>
         </table>
-
-    </form>
-
+    </div>
 </div>
 
 <footer class="text-muted">
@@ -166,8 +185,7 @@
         <p class="float-right">
             <a href="#">Back to top</a>
         </p>
-        <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-        <p>New to Bootstrap? <a href="..">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+
     </div>
 </footer>
 
@@ -175,10 +193,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="./bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
-<script src="./bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
-<script src="./bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>
+<%-- <script>window.jQuery || document.write('<script src="./bootstrap-4.0.0/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>--%>
+<%--<script src="./bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>--%>
+<%--<script src="./bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>--%>
+<%--<script src="./bootstrap-4.0.0/assets/js/vendor/holder.min.js"></script>--%>
 
 
 <svg xmlns="http://www.w3.org/2000/svg" width="449" height="225" viewBox="0 0 449 225" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="22" style="font-weight:bold;font-size:22pt;font-family:Arial, Helvetica, Open Sans, sans-serif">Thumbnail</text></svg>
@@ -193,9 +211,49 @@
                  var toastSuccess = document.getElementById('succesReaction')
                  var toast = new bootstrap.Toast(toastSuccess)
                  toast.show()
-             }).fail(function(msg){
-
+             })
+            .fail(function(msg){
+                var toastFail = document.getElementById('failureReaction')
+                var toast = new bootstrap.Toast(toastFail)
+                toast.show()
         })
+    }
+
+    function sendStory(){
+        let textarea = document.getElementsByName("contenuto")[0]
+        let contenuto = textarea.value
+
+        $.post("Story",
+            {
+                "contenuto": contenuto
+            },
+            function(msg){
+                var toastSuccess = document.getElementById('successStory')
+                var toast = new bootstrap.Toast(toastSuccess)
+                toast.show()
+            })
+            .fail(function(msg){
+                var toastFail = document.getElementById('failureStory')
+                var toast = new bootstrap.Toast(toastFail)
+                toast.show()
+            })
+    }
+
+    function sendPost(storyID){
+        $.post("Story",
+            {
+                storyId: storyID,
+            },
+            function(msg){
+                var toastSuccess = document.getElementById('succesSave')
+                var toast = new bootstrap.Toast(toastSuccess)
+                toast.show()
+            })
+            .fail(function(msg){
+                var toastFail = document.getElementById('failureSave')
+                var toast = new bootstrap.Toast(toastFail)
+                toast.show()
+            })
     }
 
 </script>

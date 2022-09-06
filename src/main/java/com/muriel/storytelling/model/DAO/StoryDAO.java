@@ -2,16 +2,15 @@ package com.muriel.storytelling.model.DAO;
 
 
 import com.muriel.storytelling.DB.ConnPool;
-import com.muriel.storytelling.model.Story;
+import com.muriel.storytelling.model.StoryModel;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class StoryDAO
 {
-    public ArrayList<Story> getAllStories() throws SQLException {
-        ArrayList<Story> stories = new ArrayList<Story>();
+    public ArrayList<StoryModel> getAllStories() throws SQLException {
+        ArrayList<StoryModel> stories = new ArrayList<StoryModel>();
 
         Connection conn = ConnPool.getConnection();
         String sql = "SELECT * FROM Storia";
@@ -21,7 +20,7 @@ public class StoryDAO
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
-                Story story = new Story();
+                StoryModel story = new StoryModel();
                 story.setId(rs.getInt("id"));
                 story.setUsername(rs.getString("username"));
                 story.setContenuto(rs.getString("contenuto"));
@@ -46,9 +45,9 @@ public class StoryDAO
         return stories;
     }
 
-    public ArrayList<Story> getStoriesByUsername(String username)
+    public ArrayList<StoryModel> getStoriesByUsername(String username)
     {
-        ArrayList<Story> stories = new ArrayList<Story>();
+        ArrayList<StoryModel> stories = new ArrayList<StoryModel>();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -61,7 +60,7 @@ public class StoryDAO
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
             while (rs.next()) {
-                Story story = new Story();
+                StoryModel story = new StoryModel();
                 story.setId(rs.getInt("id"));
                 story.setUsername(rs.getString("username"));
                 story.setContenuto(rs.getString("contenuto"));
@@ -160,9 +159,9 @@ public class StoryDAO
 
     }
 */
-    public Story getStoryByID(int id)
+    public StoryModel getStoryByID(int id)
     {
-        Story story = new Story();
+        StoryModel story = new StoryModel();
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -196,7 +195,7 @@ public class StoryDAO
         return story;
     }
 
-    public void saveStory(Story story)
+    public boolean saveStory(StoryModel story)
     {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -218,6 +217,7 @@ public class StoryDAO
         catch (SQLException e) {
             // Auto-generated catch block
             e.printStackTrace();
+            return false;
         } finally {
             try {
                 ps.close();
@@ -227,6 +227,7 @@ public class StoryDAO
                 e.printStackTrace();
             }
         }
+        return true;
     }
 
    // public void deleteStory(Story story)
