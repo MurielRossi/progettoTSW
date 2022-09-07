@@ -1,6 +1,6 @@
+<%@ page import="com.muriel.storytelling.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib
-        prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%-- jstl permette di implementare logica attraverso i tag, altrimenti dovrei usare codice Java --%>
 
 <html>
 <head>
@@ -16,10 +16,12 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-     <link href="./customcss/general.css" rel="stylesheet">
-
- </head>
- <body>
+    <link href="./customcss/general.css" rel="stylesheet">
+    <%User user = (User) session.getAttribute("user");%> <%-- nelle jsp: request, response, session, application e page context sono già definiti --%>
+    <%-- page context è la memoria riferita ad una pagina --%>
+    <%-- application è la memoria riferita a tutta l'applicazione --%>
+</head>
+<body>
 <%-- INIZIO TOASTS REACTIONS--%>
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
      <div id="succesReaction" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -102,7 +104,36 @@
     </div>
 </div>
 
-<%-- FINE TOASTS SALVASTORIA--%>
+<%-- FINE TOASTS ELIMINASTORIA--%>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="successDelete" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Ok!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Storia eliminata correttamente.
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    <div id="failureDelete" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <span>⚠️ </span>
+            <strong class="me-auto">Ops!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Non è stato possibile eliminare la storia.
+        </div>
+    </div>
+</div>
+
+<%-- FINE TOASTS ELIMINASTORIA--%>
+
 
 
  <header>
@@ -162,6 +193,10 @@
                                      <div class="btn-group">
                                          <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendReaction(this.value)"> <c:out value = "${story.NReazioni}"> </c:out> ❤️</button>
                                          <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendPost(this.value)">❤️</button>
+                                         <%-- <%if((user.getIsAdmin()) || (user.getUsername().equals())){%>  --%>
+                                         <c:if test="${(user.username == story.username) || (user.isAdmin == true)}"> <!--expression language(jstl) -->
+                                            <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="deleteStory(this.value)">Elimina</button>
+                                         </c:if>
                                      </div>
                                      <small class="text-muted"><c:out value = "${story.dataCreazione}"> </c:out></small>
                                  </div>
@@ -173,40 +208,28 @@
          </div>
      </div>
  </main>
+
+
  <!-- QUESTA E' LA NAVBAR DI SOTTO -->
-
-<div class=" collapse" email="navbarBottom" style="">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-                <ul class="list-unstyled">
-
-                </ul>
-            </div>
+<%if(user != null){%>
+    <div class="navbar navbar-dark bg-dark fixed-bottom align-content-center">
+        <div class="container" id = "scriviStoria">
+            <table>
+                <tr>
+                    <td style="width: 95%">
+                        <textarea email="contenuto" name="contenuto" style="width: 100%; padding: 5px" rows="4" placeholder="Scrivi la tua storia..."></textarea>
+                        <span email="lenght-alert" class="alert-info " hidden>Questa storia non ha il numero adeguato di caratteri!</span>
+                    </td>
+                    <td style="width:5%; height: 100%">
+                        <button class="btn btn-lg btn-primary btn-block" style="width: 100%; height: 100%"  onclick="sendStory()">
+                            <img class="mb-4" src="./images/publish.png" alt="" width="40" height="40">
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-</div>
-
-<div class="navbar navbar-dark bg-dark fixed-bottom align-content-center">
-    <div class="container" id = "scriviStoria">
-        <table>
-            <tr>
-                <td style="width: 95%">
-                    <textarea email="contenuto" name="contenuto" style="width: 100%; padding: 5px" rows="4" placeholder="Scrivi la tua storia..."></textarea>
-                    <span email="lenght-alert" class="alert-info " hidden>Questa storia non ha il numero adeguato di caratteri!</span>
-                </td>
-                <td style="width:5%; height: 100%">
-                    <button class="btn btn-lg btn-primary btn-block" style="width: 100%; height: 100%"  onclick="sendStory()">
-                        <img class="mb-4" src="./images/publish.png" alt="" width="40" height="40">
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
+<%}%>
 
 <footer class="text-muted">
     <div class="container">
@@ -271,6 +294,22 @@
             })
             .fail(function(msg){
                 var toastFail = document.getElementById('failureSave')
+                var toast = new bootstrap.Toast(toastFail)
+                toast.show()
+            })
+    }
+    function deleteStory(storyID){
+        $.post("CancellaStoria",
+            {
+                storyId: storyID,
+            },
+            function(msg){
+                var toastSuccess = document.getElementById('successDelete')
+                var toast = new bootstrap.Toast(toastSuccess)
+                toast.show()
+            })
+            .fail(function(msg){
+                var toastFail = document.getElementById('failureDelete')
                 var toast = new bootstrap.Toast(toastFail)
                 toast.show()
             })

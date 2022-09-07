@@ -229,8 +229,37 @@ public class StoryDAO
         return true;
     }
 
-   // public void deleteStory(Story story)
-    //{
+    public boolean deleteStory(StoryModel story)
+    {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try{
+            conn = ConnPool.getConnection();
+            ps = conn.prepareStatement("DELETE from storia WHERE values (?,?,?,?,?)");
+            ps.setString(1, story.getUsername());
+            ps.setString(2, story.getContenuto());
+            ps.setInt(3,story.getNReazioni());
+            ps.setInt(4,0);
+            ps.setDate(5, Date.valueOf(story.getDataCreazione()));
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            story.setId(rs.getInt(1));
 
-    //}
+        }
+        catch (SQLException e) {
+            // Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                ps.close();
+                ConnPool.releaseConnection(conn);
+            } catch (SQLException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
 }

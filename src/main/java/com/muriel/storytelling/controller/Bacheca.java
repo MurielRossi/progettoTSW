@@ -33,7 +33,7 @@ public class Bacheca extends HttpServlet
         StoryDAO dao = new StoryDAO();
         UserDAO uD = new UserDAO();
 
-        User u = new User("gigino","ciao","email", false);
+        User u = new User("gigino","Ciao123","email", false);
         User ciao = new User("muriella","srtfhd","adrth", false);
         User hello = new User("simoncino","sxthyyfd","sxdruuh", false);
         User jh = new User("peppino","jyuhtgf","tyud", false);
@@ -53,9 +53,7 @@ public class Bacheca extends HttpServlet
         uD.saveUser(tfd);
 
 
-        dao.saveStory(s);
-        dao.saveStory(t);
-        dao.saveStory(g);
+        dao.sav
         dao.saveStory(f);
         dao.saveStory(h);
 
