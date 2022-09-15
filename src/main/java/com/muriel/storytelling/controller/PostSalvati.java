@@ -33,8 +33,11 @@ public class PostSalvati extends HttpServlet
 
 
         ArrayList<StoryModel> stories = new ArrayList<>();
-        HttpSession sessione = request.getSession(true);
+        HttpSession sessione = request.getSession(true); //anche l'utente non loggato può visualizzare i post salvati
         ArrayList<Integer> salvati = (ArrayList<Integer>) sessione.getAttribute("salvati");
+        if(salvati == null)
+            salvati = new ArrayList<>();
+
         if(salvati.size() < 1)
             request.setAttribute("noStories", true);
 

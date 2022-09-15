@@ -53,7 +53,6 @@ public class Bacheca extends HttpServlet
         uD.saveUser(tfd);
 
 
-        dao.sav
         dao.saveStory(f);
         dao.saveStory(h);
 
