@@ -131,11 +131,22 @@
 
 <script>
     let submitable = false;
+    let submitable1 = false;
+    let submitable2 = false;
+    let submitable3 = false;
+
 
     function validateData(){
         existingEmail();
+        existingUsername();
         testPassword(document.getElementById());
 
+        if(submitable1 && submitable2 && submitable3)
+        {
+            submitable = true;
+        }
+
+        return submitable;
     }
 
     function existingEmail(){
@@ -149,10 +160,11 @@
                     submit.disabled = true;
                     emailalert.hidden = false;
                     console.log("email rejected");
-                    submitable = false;
                 } else{
                     submit.disabled = false;
                     emailalert.hidden = true;
+                    submitable1 = true;
+
                 }
             }
         };
@@ -175,6 +187,7 @@
                 } else{
                     submit.disabled = false;
                     usernamealert.hidden = true;
+                    submitable2 = true;
                 }
             }
         };
@@ -191,8 +204,11 @@
             passAlert.innerText="La password non rispetta i parametri richiesti!"
             passAlert.hidden=false;
         }
-        else
-            passAlert.hidden=true;
+        else{
+            passAlert.hidden=true
+            submitable3 = true;
+        }
+
     }
 </script>
 
