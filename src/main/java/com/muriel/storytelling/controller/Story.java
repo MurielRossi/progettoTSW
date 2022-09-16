@@ -21,7 +21,7 @@ public class Story extends HttpServlet
         StoryDAO storyDao = new StoryDAO();
         StoryModel story = new StoryModel();
 
-        HttpSession sessione = request.getSession(false);
+        HttpSession sessione = request.getSession(false); //posso scrivere una storia solo se sono loggato
 
         if(sessione == null)
         {

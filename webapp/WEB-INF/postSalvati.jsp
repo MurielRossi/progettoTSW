@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%-- jstl permette di implementare logica attraverso i tag, altrimenti dovrei usare codice Java --%>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -53,27 +55,27 @@
 <%-- FINE TOASTS REACTIONS--%>
 <%-- INIZIO TOASTS STORY--%>
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-    <div id="successStory" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="successRemove" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <img src="..." class="rounded me-2" alt="...">
             <strong class="me-auto">Ok!</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-            Storia aggiunta correttamente.
+            Storia rimossa correttamente.
         </div>
     </div>
 </div>
 
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
-    <div id="failureStory" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="failureRemove" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <span>⚠️ </span>
             <strong class="me-auto">Ops!</strong>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-            Non è stato possibile aggiungere la storia.
+            Non è stato possibile rimuovere la storia.
         </div>
     </div>
 </div>
@@ -125,12 +127,13 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <c:forEach items="${salvati}" var="story"> <!-- da dove se lo va a prenedere??? -->
+                <c:forEach items="${stories}" var="story"> <!-- da dove se lo va a prenedere??? (attributo nella request)-->
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" data-src="https://source.unsplash.com/random" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://source.unsplash.com/random" data-holder-rendered="true">
                             <div class="card-body">
                                 <p class="card-text"> <c:out value = "${story.contenuto}"> </c:out></p>
+
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendReaction(this.value)"> <c:out value = "${story.NReazioni}"> </c:out> ❤️</button>
@@ -199,17 +202,17 @@
 
 
     function unsendPost(storyID){
-        $.post("Story",
+        $.post("RimuoviPostSalvati",
             {
                 storyId: storyID,
             },
             function(msg){
-                var toastSuccess = document.getElementById('succesSave')
+                var toastSuccess = document.getElementById('successRemove')
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
             })
             .fail(function(msg){
-                var toastFail = document.getElementById('failureSave')
+                var toastFail = document.getElementById('failureRemove')
                 var toast = new bootstrap.Toast(toastFail)
                 toast.show()
             })

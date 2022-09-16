@@ -1,5 +1,6 @@
 package com.muriel.storytelling.controller;
 
+import com.muriel.storytelling.model.DAO.StoryDAO;
 import com.muriel.storytelling.model.StoryModel;
 import com.muriel.storytelling.model.User;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SalvaPost extends HttpServlet
@@ -26,7 +28,9 @@ public class SalvaPost extends HttpServlet
 
         if(salvati.contains(storyID))
             return;
+
         salvati.add(storyID);
+
         sessione.setAttribute("salvati", salvati);
 
     }

@@ -28,6 +28,7 @@ public class PostSalvati extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException //sto chiedendo qualcosa al server
     {
+
         StoryDAO dao = new StoryDAO();
         UserDAO uD = new UserDAO();
 

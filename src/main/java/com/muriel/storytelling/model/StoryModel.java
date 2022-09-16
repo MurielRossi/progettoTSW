@@ -19,6 +19,16 @@ public class StoryModel implements Serializable
         return id == story.id && nReazioni == story.nReazioni && username.equals(story.username) && contenuto.equals(story.contenuto) && Objects.equals(dataCreazione, story.dataCreazione);
     }
 
+    @Override
+    public String toString() {
+        return "StoryModel{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", contenuto='" + contenuto + '\'' +
+                ", nReazioni=" + nReazioni +
+                ", dataCreazione=" + dataCreazione +
+                '}';
+    }
 
     public LocalDate getDataCreazione() {
         return dataCreazione;

@@ -15,14 +15,13 @@
     <!--<link rel="stylesheet" href="./customcss/general.css"/>
     <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./customcss/general.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 
-    /docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+
     <meta name="theme-color" content="#712cf9">
 
 
@@ -73,7 +72,6 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
     <link href="cover.css" rel="stylesheet">
     <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
 </head>
@@ -97,30 +95,105 @@
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class=" py-2">
-                <input type="username" class="form-control" email="floatingUsername" placeholder="nameexample19">
+                <input id="username" type="username" class="form-control" email="floatingUsername" placeholder="nameexample19" onfocusout="existingUsername()">
+                <span id="username-alert" class="alert-info " hidden>Username già presente</span>
+                <br>
+
                 <label for="floatingInput">Username</label>
             </div>
 
             <div class=" py-2">
-                <input type="email" class="form-control" email="floatingInput" placeholder="name@example.com">
+                <input id="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()">
+                <span id="email-alert" class="alert-info " hidden>Email non corretta</span>
+                <br>
+
                 <label for="floatingInput">Email address</label>
             </div>
 
             <div class=" py-2">
-                <input type="password" class="form-control" email="floatingPassword" placeholder="Password">
+                <input id="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)">
+                <span id="password-alert" class="alert-info " hidden>Password non inserita</span>
+
                 <label for="floatingPassword">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button id="submit-registration" class="w-100 btn btn-lg btn-primary" type="submit" onclick="validateData()">Registrati</button>
             <p class="mt-5 mb-3 text-muted">Storytelling</p>
         </form>
     </main>
 
     <footer class="mt-auto text-white-50">
-        <p>Il progetto &egrave rep mnjui87eribile a questo link: <a href="https://github.com/MurielRossi/progettoTSW" class="text-white">progettoTSW</a></p>
+        <p>Il progetto &egrave reperibile a questo link: <a href="https://github.com/MurielRossi/progettoTSW" class="text-white">progettoTSW</a></p>
         <p>Autrice: <a href="https://github.com/MurielRossi" class="text-white">Muriel Rossi</a></p>
 
     </footer>
 </div>
+
+<script>
+    let submitable = false;
+
+    function validateData(){
+        existingEmail();
+        testPassword(document.getElementById());
+
+    }
+
+    function existingEmail(){
+        let xhttp = new XMLHttpRequest();
+        let emailalert = document.getElementById("email-alert");
+        let submit = document.getElementById("submit-registration");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "true") {
+                    emailalert.innerText = "Email già presente!";
+                    submit.disabled = true;
+                    emailalert.hidden = false;
+                    console.log("email rejected");
+                    submitable = false;
+                } else{
+                    submit.disabled = false;
+                    emailalert.hidden = true;
+                }
+            }
+        };
+        xhttp.open("POST", "./verificaEmail", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("email="+document.getElementById("email").value);
+    }
+
+    function existingUsername(){
+        let xhttp = new XMLHttpRequest();
+        let usernamealert = document.getElementById("username-alert");
+        let submit = document.getElementById("submit-registration");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == "true") {
+                    usernamealert.innerText = "Username già in uso";
+                    submit.disabled = true;
+                    usernamealert.hidden = false;
+                    console.log("username rejected");
+                } else{
+                    submit.disabled = false;
+                    usernamealert.hidden = true;
+                }
+            }
+        };
+        xhttp.open("POST", "./verificaUsername", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username="+document.getElementById("username").value);
+    }
+
+    function testPassword(password){
+        let regex=new RegExp("^(?=.*[a-z])(?=.*\\d)(?=.*[@#$%._-])(?=.*[A-Z]).{8,16}$");
+        let passAlert= document.getElementById("password-alert");
+        console.log(regex.test(password));
+        if(!regex.test(password)){
+            passAlert.innerText="La password non rispetta i parametri richiesti!"
+            passAlert.hidden=false;
+        }
+        else
+            passAlert.hidden=true;
+    }
+</script>
 
 </body>

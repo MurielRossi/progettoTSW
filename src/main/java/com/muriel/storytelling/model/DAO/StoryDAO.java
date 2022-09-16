@@ -164,7 +164,7 @@ public class StoryDAO
         Connection conn = null;
         PreparedStatement ps;
         conn = ConnPool.getConnection();
-        String sql = "SELECT * FROM Story WHERE id =?";
+        String sql = "SELECT * FROM Storia WHERE id =?";
         ps = conn.prepareStatement(sql);
         ps.setInt(1,id);
 
@@ -172,6 +172,8 @@ public class StoryDAO
 
             ps.executeQuery();
             ResultSet rs = ps.getResultSet();
+            rs.next();
+            story.setId(id);
             story.setUsername(rs.getString("username"));
             story.setContenuto(rs.getString("contenuto"));
             story.setNReazioni(rs.getInt("nReazioni"));
@@ -236,16 +238,41 @@ public class StoryDAO
         try{
             conn = ConnPool.getConnection();
             ps = conn.prepareStatement("DELETE from storia WHERE values (?,?,?,?,?)");
-            ps.setString(1, story.getUsername());
-            ps.setString(2, story.getContenuto());
-            ps.setInt(3,story.getNReazioni());
-            ps.setInt(4,0);
+            ps.setInt(1,story.getId());
+            ps.setString(2, story.getUsername());
+            ps.setString(3, story.getContenuto());
+            ps.setInt(4,story.getNReazioni());
             ps.setDate(5, Date.valueOf(story.getDataCreazione()));
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            story.setId(rs.getInt(1));
 
+        }
+        catch (SQLException e) {
+            // Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                ps.close();
+                ConnPool.releaseConnection(conn);
+            } catch (SQLException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public boolean deleteStoryById(Integer id)
+    {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try{
+            conn = ConnPool.getConnection();
+            ps = conn.prepareStatement("DELETE from storia WHERE id=?");
+            ps.setInt(1, id);
+            ps.executeUpdate();
         }
         catch (SQLException e) {
             // Auto-generated catch block

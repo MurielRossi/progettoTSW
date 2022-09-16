@@ -2,6 +2,7 @@ package com.muriel.storytelling.model.DAO;
 
 
 import com.muriel.storytelling.DB.ConnPool;
+import com.muriel.storytelling.model.StoryModel;
 import com.muriel.storytelling.model.User;
 
 import java.sql.*;
@@ -119,8 +120,87 @@ public class UserDAO
 
     }
 
-    // public void deleteStory(Story story)
-    //{
+    public User getUserByEmail(String email) throws SQLException {
+        User user = new User();
+        Connection conn = null;
+        PreparedStatement ps;
+        conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Utente WHERE email =?";
+        ps = conn.prepareStatement(sql);
+        ps.setString(1,email);
 
-    //}
+        try{
+            ps.executeQuery();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next())
+            {
+                user.setEmail(email);
+                user.setPassword(rs.getString("password"));
+                user.setUsername(rs.getString("username"));
+                user.setIsAdmin(rs.getBoolean("isAdmin"));
+            }
+            else {
+                user = null;
+            }
+
+        }
+        catch (SQLException e) {
+            // Auto-generated catch block
+            user = null;
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                ConnPool.releaseConnection(conn);
+            } catch (SQLException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return user;
+    }
+
+    public User getUserByUsername(String username) throws SQLException {
+        User user = new User();
+        Connection conn = null;
+        PreparedStatement ps;
+        conn = ConnPool.getConnection();
+        String sql = "SELECT * FROM Utente WHERE username =?";
+        ps = conn.prepareStatement(sql);
+        ps.setString(1,username);
+
+        try{
+            ps.executeQuery();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next()) {
+                user.setUsername(username);
+                user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
+                user.setIsAdmin(rs.getBoolean("isAdmin"));
+            }
+            else {
+                user = null;
+
+            }
+
+        }
+        catch (SQLException e) {
+            // Auto-generated catch block
+            user = null;
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                ConnPool.releaseConnection(conn);
+            } catch (SQLException e) {
+                // Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
+        return user;
+    }
+
+
 }
