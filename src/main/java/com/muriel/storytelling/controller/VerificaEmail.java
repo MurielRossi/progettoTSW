@@ -29,12 +29,16 @@ public class VerificaEmail extends HttpServlet
         }
         if(user != null)
         {
-            response.getWriter().write("true");
+            response.setStatus(400);
+            response.getWriter().write("Email già presente!");
             return;
         }
 
         else
-            response.getWriter().write("false");
+        {
+            response.setStatus(200);
+
+        }
 
         return;
     }

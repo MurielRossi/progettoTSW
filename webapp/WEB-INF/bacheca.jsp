@@ -19,8 +19,6 @@
     <link href="./customcss/general.css" rel="stylesheet">
     <%User user = (User) session.getAttribute("user");%> <%-- nelle jsp: request, response, session, application e page context sono già definiti --%>
     <%-- page context è la memoria riferita ad una pagina --%>
-    <%-- application è la memoria riferita a tutta l'applicazione --%>
-</head>
 <body>
 <%-- INIZIO TOASTS REACTIONS--%>
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">

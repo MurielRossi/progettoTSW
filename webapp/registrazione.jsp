@@ -95,26 +95,26 @@
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class=" py-2">
-                <input id="username" type="username" class="form-control" email="floatingUsername" placeholder="nameexample19" onfocusout="existingUsername()">
+                <input id="username" type="username" class="form-control" placeholder="nameexample19" onfocusout="existingUsername()" required>
                 <span id="username-alert" class="alert-info " hidden>Username già presente</span>
                 <br>
 
-                <label for="floatingInput">Username</label>
+                <label for="username">Username</label>
             </div>
 
             <div class=" py-2">
-                <input id="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()">
+                <input id="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()" required>
                 <span id="email-alert" class="alert-info " hidden>Email non corretta</span>
                 <br>
 
-                <label for="floatingInput">Email address</label>
+                <label for="email">Email address</label>
             </div>
 
             <div class=" py-2">
                 <input id="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)">
                 <span id="password-alert" class="alert-info " hidden>Password non inserita</span>
 
-                <label for="floatingPassword">Password</label>
+                <label for="password">Password</label>
             </div>
 
             <button id="submit-registration" class="w-100 btn btn-lg btn-primary" type="submit" onclick="validateData()">Registrati</button>
@@ -144,7 +144,20 @@
         if(submitable1 && submitable2 && submitable3)
         {
             submitable = true;
+            $user("Registrazione")
+            {
+                "email": email;
+                "username": username;
+                "password": password;
+                "isAdmin": isAdmin;
+            }
+
+            xhttp.open("POST", "./registrazione", true);
+
+
         }
+
+
 
         return submitable;
     }
@@ -154,9 +167,8 @@
         let emailalert = document.getElementById("email-alert");
         let submit = document.getElementById("submit-registration");
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "true") {
-                    emailalert.innerText = "Email già presente!";
+            if (this.readyState == 4 && this.status == 400) {
+                    emailalert.innerText = this.responseText;
                     submit.disabled = true;
                     emailalert.hidden = false;
                     console.log("email rejected");
@@ -166,7 +178,6 @@
                     submitable1 = true;
 
                 }
-            }
         };
         xhttp.open("POST", "./verificaEmail", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -178,18 +189,17 @@
         let usernamealert = document.getElementById("username-alert");
         let submit = document.getElementById("submit-registration");
         xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText == "true") {
-                    usernamealert.innerText = "Username già in uso";
-                    submit.disabled = true;
-                    usernamealert.hidden = false;
-                    console.log("username rejected");
-                } else{
+            if (this.readyState == 4 && this.status == 400) {
+                usernamealert.innerText = this.responseText;
+                submit.disabled = true;
+                usernamealert.hidden = false;
+                console.log("username rejected");
+            } else{
                     submit.disabled = false;
                     usernamealert.hidden = true;
                     submitable2 = true;
-                }
             }
+
         };
         xhttp.open("POST", "./verificaUsername", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

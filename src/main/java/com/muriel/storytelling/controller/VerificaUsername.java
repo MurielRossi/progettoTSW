@@ -28,14 +28,18 @@ public class VerificaUsername extends HttpServlet
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         if(user != null)
         {
-            response.getWriter().write("true");
+            response.setStatus(400);
+            response.getWriter().write("Username già presente!");
             return;
         }
 
         else
-            response.getWriter().write("false");
+            response.setStatus(200);
+
+
 
         return;
     }

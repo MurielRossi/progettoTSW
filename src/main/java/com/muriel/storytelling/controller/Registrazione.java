@@ -16,6 +16,15 @@ public class Registrazione extends HttpServlet
         UserDAO userDAO = new UserDAO();
         User user = new User();
 
+        user.setEmail(request.getParameter("email"));
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setIsAdmin(Boolean.parseBoolean(request.getParameter("isAdmin")));
+
+        userDAO.saveUser(user);
+
+
+
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException //sto chiedendo qualcosa al server, il server mi sta mandando qualcosa
