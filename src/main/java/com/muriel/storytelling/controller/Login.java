@@ -10,41 +10,53 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
-@WebServlet(name="registrazione",value = "/registrazione")
+@WebServlet(name="login",value = "/login")
 
-public class Registrazione extends HttpServlet
+
+public class Login extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException //sto mandando qualcosa al server
     {
-
         UserDAO userDAO = new UserDAO();
         User user = new User();
 
-        user.setEmail(request.getParameter("email"));
-        user.setUsername(request.getParameter("username"));
-        user.setPassword(request.getParameter("password"));
-        user.setIsAdmin(false);
+        String email = request.getParameter("email");
+        try {
+            user = userDAO.getUserByEmail(email);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-        if(user.getEmail() != null && user.getUsername() != null && user.getPassword() != null)
-        {
-            userDAO.saveUser(user);
-            response.setStatus(200);
-            request.getSession().setAttribute("user", user);
-
-            response.sendRedirect(request.getContextPath()+"/Bacheca");
+        if(user == null) {
+            response.setStatus(400);
+            response.getWriter().write("Utente non trovato!");
 
         }
         else
-            response.setStatus(400);
+        {
+            if(user.getPassword().equals(request.getParameter("password")))
+            {
+                response.setStatus(200);
+                request.getSession().setAttribute("user", user);
+
+
+                response.sendRedirect(request.getContextPath()+"/Bacheca");
+            }
+            else
+                response.getWriter().write("La password non è corretta!");
+
+        }
 
         return;
+
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException //sto chiedendo qualcosa al server, il server mi sta mandando qualcosa
     {
-        RequestDispatcher disp = request.getRequestDispatcher("registrazione.jsp");
+        RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
         disp.forward(request, response);
     }
 }

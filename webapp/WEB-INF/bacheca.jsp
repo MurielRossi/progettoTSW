@@ -5,11 +5,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.icons">
 
+    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Bacheca</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
@@ -129,9 +126,7 @@
         </div>
     </div>
 </div>
-
 <%-- FINE TOASTS ELIMINASTORIA--%>
-
 
 
  <header>
@@ -139,14 +134,21 @@
          <div class="container">
              <div class="row">
                  <div class="col-sm-8 col-md-7 py-4">
-                     <h4 class="text-white">Ciao </h4>
+                     <h4 class="text-white">Benvenuto!</h4>
                  </div>
                  <div class="col-sm-4 offset-md-1 py-4">
                      <h4 class="text-white">Azioni</h4>
                      <ul class="list-unstyled">
                          <li><a href="${pageContext.request.contextPath}/PostSalvati" class="text-white">Storie salvate</a></li>
-                         <li><a href="#" class="text-white">Disconnettimi</a></li>
-                         <li><a href="#" class="text-white">Elimina il mio account</a></li>
+                         <c:if test="${not empty user}"> <!-- se l'utente è loggato -->
+                             <li><a href="${pageContext.request.contextPath}/logout" class="text-white">Disconnettimi</a></li>
+                             <li><a href="${pageContext.request.contextPath}/eliminazione" class="text-white">Elimina il mio account</a></li>
+                         </c:if>
+
+                         <c:if test="${empty user}"> <!-- se l'utente non è loggato -->
+                             <li><a href="${pageContext.request.contextPath}/login" class="text-white">Login</a></li>
+                             <li><a href="${pageContext.request.contextPath}/registrazione" class="text-white">Registrati</a></li>
+                         </c:if>
                      </ul>
                  </div>
              </div>
@@ -156,7 +158,7 @@
          <div class="container d-flex justify-content-between">
              <a href="#" class="navbar-brand d-flex align-items-center">
                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                 <strong>Album</strong>
+                 <strong>Bacheca</strong>
              </a>
              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="true" aria-label="Toggle navigation">
                  <span class="navbar-toggler-icon"></span>
@@ -169,12 +171,14 @@
 
      <section class="jumbotron text-center">
          <div class="container">
-             <h1 class="jumbotron-heading">Album example</h1>
-             <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+             <h1 class="jumbotron-heading">Storytelling</h1>
+             <p class="lead text-muted">Racconta anche tu la tua storia!</p>
+             <!--
              <p>
                  <a href="#" class="btn btn-primary my-2">Main call to action</a>
                  <a href="#" class="btn btn-secondary my-2">Secondary action</a>
              </p>
+             -->
          </div>
      </section>
 
@@ -184,6 +188,7 @@
                      <c:forEach items="${stories}" var="story">
                      <div class="col-md-4">
                          <div class="card mb-4 box-shadow">
+                             <strong>@ <c:out value = "${story.username}"> </c:out></strong>
                              <img class="card-img-top" data-src="https://source.unsplash.com/random" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="https://source.unsplash.com/random" data-holder-rendered="true">
                              <div class="card-body">
                                  <p class="card-text"> <c:out value = "${story.contenuto}"> </c:out></p>
@@ -229,14 +234,7 @@
     </div>
 <%}%>
 
-<footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Back to top</a>
-        </p>
 
-    </div>
-</footer>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

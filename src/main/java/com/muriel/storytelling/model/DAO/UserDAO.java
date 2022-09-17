@@ -202,5 +202,13 @@ public class UserDAO
         return user;
     }
 
+    public boolean deleteUser(String email) throws SQLException
+    {
+        Connection conn = ConnPool.getConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM utente WHERE email=?;");
+        ps.setString(1, email.toLowerCase());
+        return ps.executeUpdate() > 0;
+    }
+
 
 }

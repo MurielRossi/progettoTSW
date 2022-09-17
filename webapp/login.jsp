@@ -12,69 +12,15 @@
 
 
 
-    <link rel="stylesheet" href="./customcss/general.css"/>
-    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./customcss/general.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
 
-
-    <style>
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            /*flex-wrap: nowrap;*/
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
 </head>
 <body class="d-flex h-100 text-center text-bg-dark">
 
@@ -83,30 +29,35 @@
         <div>
             <h3 class="float-md-start mb-2 px-5">Login</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end align-items-center">
-                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-3" href="#">Features</a>
-                <a class="nav-link fw-bold py-1 px-3" href="#">Contact</a>
+                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="index.jsp">Home</a>
+                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
+                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/Bacheca">Bacheca</a>
             </nav>
         </div>
     </header>
 
     <main class="w-100 align-items-center">
-        <form class="w-50 align-items-center " style="display: inline-block;">
+        <form class="w-50 align-items-center " style="display: inline-block;" action="./login" method="post">
             <img class="mb-4" src="./images/fairytale.png" alt="" width="86" height="70">
-            <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+            <h1 class="h3 mb-3 fw-normal">Inserisci le tue credenziali</h1>
 
 
             <div class=" py-2">
-                <input type="email" class="form-control" email="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
+                <input id="email" name="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" required>
+                <span id="email-alert" class="alert-info " hidden>Email non corretta</span>
+                <br>
+
+                <label for="email">Email address</label>
             </div>
 
             <div class=" py-2">
-                <input type="password" class="form-control" email="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+                <input id="password" name="password" type="password" class="form-control" password="floatingPassword" placeholder="Password" >
+                <span id="password-alert" class="alert-info " hidden>Password non inserita</span>
+
+                <label for="password">Password</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <button id="submit-registration" class="w-100 btn btn-lg btn-primary" type="submit">Accedi</button>
             <p class="mt-5 mb-3 text-muted">Storytelling</p>
         </form>
     </main>

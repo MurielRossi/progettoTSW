@@ -10,10 +10,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">
 
 
-
-
-    <!--<link rel="stylesheet" href="./customcss/general.css"/>
-    <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="./bootstrap-5.2.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="./customcss/general.css" rel="stylesheet">
 
@@ -25,51 +21,6 @@
     <meta name="theme-color" content="#712cf9">
 
 
-    <style>
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
-        .b-example-divider {
-            height: 3rem;
-            background-color: rgba(0, 0, 0, .1);
-            border: solid rgba(0, 0, 0, .15);
-            border-width: 1px 0;
-            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-        }
-
-        .b-example-vr {
-            flex-shrink: 0;
-            width: 1.5rem;
-            height: 100vh;
-        }
-
-        .bi {
-            vertical-align: -.125em;
-            fill: currentColor;
-        }
-
-        .nav-scroller {
-            position: relative;
-            z-index: 2;
-            height: 2.75rem;
-            overflow-y: hidden;
-        }
-
-        .nav-scroller .nav {
-            display: flex;
-            /*flex-wrap: nowrap;*/
-            padding-bottom: 1rem;
-            margin-top: -1px;
-            overflow-x: auto;
-            text-align: center;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
-    </style>
 
 
     <link href="cover.css" rel="stylesheet">
@@ -82,20 +33,20 @@
         <div>
             <h3 class="float-md-start mb-2 px-5">Registrazione</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end align-items-center">
-                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-3" href="#">Features</a>
-                <a class="nav-link fw-bold py-1 px-3" href="#">Contact</a>
+                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="index.jsp">Home</a>
+                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/login">Login</a>
+                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/Bacheca">Bacheca</a>
             </nav>
         </div>
     </header>
 
     <main class="w-100 align-items-center">
-        <form class="w-50 align-items-center " style="display: inline-block;">
+        <form class="w-50 align-items-center " style="display: inline-block;" action="./registrazione" method="post">
             <img class="mb-4" src="./images/fairytale.png" alt="" width="86" height="70">
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class=" py-2">
-                <input id="username" type="username" class="form-control" placeholder="nameexample19" onfocusout="existingUsername()" required>
+                <input id="username" name="username" type="username" class="form-control" placeholder="nameexample19" onfocusout="existingUsername()" required>
                 <span id="username-alert" class="alert-info " hidden>Username già presente</span>
                 <br>
 
@@ -103,7 +54,7 @@
             </div>
 
             <div class=" py-2">
-                <input id="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()" required>
+                <input id="email" name="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()" required>
                 <span id="email-alert" class="alert-info " hidden>Email non corretta</span>
                 <br>
 
@@ -111,7 +62,7 @@
             </div>
 
             <div class=" py-2">
-                <input id="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)">
+                <input id="password" name="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)">
                 <span id="password-alert" class="alert-info " hidden>Password non inserita</span>
 
                 <label for="password">Password</label>
@@ -142,20 +93,8 @@
         testPassword(document.getElementById());
 
         if(submitable1 && submitable2 && submitable3)
-        {
             submitable = true;
-            $user("Registrazione")
-            {
-                "email": email;
-                "username": username;
-                "password": password;
-                "isAdmin": isAdmin;
-            }
 
-            xhttp.open("POST", "./registrazione", true);
-
-
-        }
 
 
 

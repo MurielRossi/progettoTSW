@@ -33,29 +33,35 @@ public class Bacheca extends HttpServlet
         StoryDAO dao = new StoryDAO();
         UserDAO uD = new UserDAO();
 
-        User u = new User("gigino","Ciao123","email", false);
-        User ciao = new User("muriella","srtfhd","adrth", false);
-        User hello = new User("simoncino","sxthyyfd","sxdruuh", false);
-        User jh = new User("peppino","jyuhtgf","tyud", false);
-        User tfd = new User("carola","hbtgd","htgf", false);
+        User admin = new User("admin", "Admin.123", "admin@admin.com", true);
+        User u = new User("gigino","Ciaftgo.123","email@email.com", false);
+        User ciao = new User("muriella","Hello.34dfs","ciao@kio.it", false);
+        User hello = new User("simoncino","IHiu123.","Heyyyy@hey.it", false);
+        User jh = new User("peppino","OIUJHOjnh2.","Woooooow@wow.com", false);
+        User tfd = new User("carola","YUIbgh.244.","Ciaociao@ciaooo.it", false);
 
 
 
-        StoryModel s = new StoryModel("gigino","a fess e sort",43, LocalDate.now());
-        StoryModel t = new StoryModel("muriella","a fess e mammt",43, LocalDate.now());
-        StoryModel g = new StoryModel("simoncino","a fess e nonnt",43, LocalDate.now());
-        StoryModel f = new StoryModel("peppino","a fess e zitt",43, LocalDate.now());
-        StoryModel h = new StoryModel("carola","a fess e bast",43, LocalDate.now());
+        StoryModel s = new StoryModel("gigino","Oggi è stata proprio una bella giornata!",43, LocalDate.now());
+        StoryModel t = new StoryModel("muriella","Oggi ho perso il pullman...purtoppo sono arrivato in ritardo",5, LocalDate.now());
+        StoryModel g = new StoryModel("simoncino","Nuovo acquisto: macchina nuova!",7, LocalDate.now());
+        StoryModel f = new StoryModel("peppino","L'Iphone 14 non mi convince....a voi piace?",2, LocalDate.now());
+        StoryModel h = new StoryModel("carola","Sono stufa di tutta questa pioggia",87, LocalDate.now());
+        /*
         uD.saveUser(u);
         uD.saveUser(ciao);
         uD.saveUser(hello);
         uD.saveUser(jh);
         uD.saveUser(tfd);
+        uD.saveUser(admin);
 
+
+        dao.saveStory(t);
+        dao.saveStory(g);
 
         dao.saveStory(f);
         dao.saveStory(h);
-
+        */
 
         ArrayList<StoryModel> stories = null;
         try {
@@ -66,10 +72,9 @@ public class Bacheca extends HttpServlet
         if(stories.size() < 1)
             request.setAttribute("noStories", true);
 
-        System.out.println(stories);
         request.setAttribute("stories", stories);
 
-        request.getSession().setAttribute("user", u);
+        //request.getSession().setAttribute("user", u);
         RequestDispatcher disp = request.getRequestDispatcher("WEB-INF/bacheca.jsp");
         disp.forward(request, response);
 

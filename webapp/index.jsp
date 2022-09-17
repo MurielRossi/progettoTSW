@@ -2,21 +2,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> -->
 
     <title>Storytelling</title>
 
-    <!--<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/product/">-->
-
-    <!-- Bootstrap core CSS -->
     <link href="./bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
     <link href="product.css" rel="stylesheet">
     <link rel="stylesheet" href="./customcss/general.css"/>
-
-    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
-
 <body>
 
 <nav class="site-header py-1">
@@ -24,20 +16,18 @@
         <a>
             <img class="mb-4" src="./images/fairytale.png" alt="" width="30" height="30">
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Registrati</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Login</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Visita la Home</a>
-        <!-- <a class="py-2 d-none d-md-inline-block" href="#">Support</a>
-         <a class="py-2 d-none d-md-inline-block" href="#">Pricing</a>
-         <a class="py-2 d-none d-md-inline-block" href="#">Cart</a> -->
+        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
+        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/login">Login</a>
+        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/Bacheca">Visita Storytelling!</a>
+
      </div>
  </nav>
 
  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
      <div class="col-md-5 p-lg-5 mx-auto my-5">
-         <h1 class="display-4 font-weight-normal">Punny headline</h1>
-         <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
-         <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+         <h1 class="display-4 font-weight-normal">Benvenuto su storytelling!</h1>
+         <p class="lead font-weight-normal">Il primo socialnetwork veramente libero. Racconta la tua vita e vivi quella degli altri: qui puoi raccontare le tue storie esprimendoti in modo totalmente libero!</p>
+         <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/registrazione">Inizia subito</a>
      </div>
      <div class="product-device box-shadow d-none d-md-block"></div>
      <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
@@ -124,15 +114,11 @@
      </div>
  </footer>
 
-
- <!-- Bootstrap core JavaScript
- ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../assets/js/vendor/popper.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<script src="../../assets/js/vendor/holder.min.js"></script>
+<script src="./assets/js/vendor/popper.min.js"></script>
+<script src=./dist/js/bootstrap.min.js"></script>
+<script src="./assets/js/vendor/holder.min.js"></script>
 <script>
     Holder.addTheme('thumb', {
         bg: '#55595c',

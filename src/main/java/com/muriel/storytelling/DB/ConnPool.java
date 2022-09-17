@@ -28,7 +28,7 @@ public class ConnPool
         Connection newConnection = null;
         newConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/storytelling?allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","Storytelling","Ciao.123");
         System.out.println("Create new DB connection...");
-        newConnection.setAutoCommit(false); //altrimenti quando si chiude la funzione si chiuderebbe anche la connessione
+        //newConnection.setAutoCommit(false); //altrimenti quando si chiude la funzione si chiuderebbe anche la connessione
         return newConnection;
     }
 
