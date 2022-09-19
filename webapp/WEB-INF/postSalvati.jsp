@@ -194,6 +194,8 @@
             },
             function(msg){
                 var toastSuccess = document.getElementById('succesReaction')
+                setTimeout(aggiornamento, 2000)
+
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
             })
@@ -213,6 +215,8 @@
             },
             function(msg){
                 var toastSuccess = document.getElementById('successRemove')
+                setTimeout(aggiornamento, 2000)
+
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
             })
@@ -222,6 +226,11 @@
                 toast.show()
             })
     }
+
+    function aggiornamento()
+    {
+        window.location.reload();
+    };
 
 </script>
 

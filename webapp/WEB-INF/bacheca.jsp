@@ -314,6 +314,8 @@
             },
             function(msg){
                 var toastSuccess = document.getElementById('successSave')
+                setTimeout(aggiornamento, 2000)
+
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
             })
@@ -330,6 +332,8 @@
             },
             function(msg){
                 var toastSuccess = document.getElementById('successDelete')
+                setTimeout(aggiornamento, 2000)
+
                 var toast = new bootstrap.Toast(toastSuccess)
                 toast.show()
                 setTimeout(aggiornamento, 2000)

@@ -1,5 +1,6 @@
 package com.muriel.storytelling.controller;
 
+import com.muriel.storytelling.model.DAO.SavedPostDAO;
 import com.muriel.storytelling.model.DAO.UserDAO;
 import com.muriel.storytelling.model.User;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet(name="login",value = "/login")
 
@@ -42,6 +44,14 @@ public class Login extends HttpServlet
                 response.setStatus(200);
                 request.getSession().setAttribute("user", user);
 
+                SavedPostDAO savedPostDAO = new SavedPostDAO();
+                ArrayList<Integer> salvati = null;
+                try {
+                    salvati = savedPostDAO.getAllSavedPosts(user.getEmail());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                request.getSession().setAttribute("salvati", salvati);
 
                 response.sendRedirect(request.getContextPath()+"/Bacheca");
             }

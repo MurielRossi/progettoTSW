@@ -1,6 +1,8 @@
 package com.muriel.storytelling.controller;
 
+import com.muriel.storytelling.model.DAO.SavedPostDAO;
 import com.muriel.storytelling.model.DAO.StoryDAO;
+import com.muriel.storytelling.model.SavedPostModel;
 import com.muriel.storytelling.model.StoryModel;
 import com.muriel.storytelling.model.User;
 
@@ -30,6 +32,16 @@ public class SalvaPost extends HttpServlet
             return;
 
         salvati.add(storyID);
+        if(request.getSession().getAttribute("user") != null)
+        {
+            User user = (User) request.getSession().getAttribute("user");
+            SavedPostDAO savedPostDAO = new SavedPostDAO();
+            SavedPostModel savedPostModel = new SavedPostModel();
+            savedPostModel.setIdStoria(storyID);
+            savedPostModel.setEmail(user.getEmail());
+
+            savedPostDAO.savePost(savedPostModel);
+        }
 
         sessione.setAttribute("salvati", salvati);
 

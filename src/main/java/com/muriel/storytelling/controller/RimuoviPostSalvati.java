@@ -1,6 +1,8 @@
 package com.muriel.storytelling.controller;
 
+import com.muriel.storytelling.model.DAO.SavedPostDAO;
 import com.muriel.storytelling.model.DAO.StoryDAO;
+import com.muriel.storytelling.model.SavedPostModel;
 import com.muriel.storytelling.model.StoryModel;
 import com.muriel.storytelling.model.User;
 
@@ -28,7 +30,23 @@ public class RimuoviPostSalvati extends HttpServlet
         if(!(salvati.contains(storyID)))
             response.setStatus(403);
         else {
+
+            if(request.getSession().getAttribute("user") != null)
+            {
+                User user = (User) request.getSession().getAttribute("user");
+                SavedPostDAO savedPostDAO = new SavedPostDAO();
+
+                try {
+                    boolean success = savedPostDAO.deletePost(user.getEmail(), storyID);
+                    if(!success)
+                        response.setStatus(403);
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             salvati.remove(salvati.indexOf(storyID));
+
             response.setStatus(200);
             sessione.setAttribute("salvati", salvati);
         }
