@@ -31,8 +31,9 @@ public class Login extends HttpServlet
 
         if(user == null) {
             response.setStatus(400);
-            response.getWriter().write("Utente non trovato!");
-
+            request.setAttribute("accessDenied", "Utente non trovato!");
+            RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+            disp.forward(request, response);
         }
         else
         {
@@ -44,8 +45,12 @@ public class Login extends HttpServlet
 
                 response.sendRedirect(request.getContextPath()+"/Bacheca");
             }
-            else
-                response.getWriter().write("La password non è corretta!");
+            else {
+                request.setAttribute("accessDenied", "Utente non trovato!");
+                RequestDispatcher disp = request.getRequestDispatcher("login.jsp");
+                disp.forward(request, response);
+                //response.getWriter().write("La password non è corretta!");
+            }
 
         }
 

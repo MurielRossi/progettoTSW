@@ -17,10 +17,24 @@ table
     display: inline-block;
 }
 
-#scriviStoria /* cancelletto per gli id e . per le classi*/
+#scriviStoria /* "#" per gli id e "." per le classi */
 {
     margin: auto;
-    width: 50%;
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+}
+
+#navbarTop
+{
+    align-items: center;
+    background-color: #171a1d;
+}
+
+footer
+{
+    padding-bottom: 50px;
+
 }
 
 

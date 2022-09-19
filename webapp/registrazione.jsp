@@ -18,7 +18,7 @@
 
 
 
-    <meta name="theme-color" content="#712cf9">
+   <!-- <meta name="theme-color" content="#712cf9"> -->
 
 
 
@@ -29,15 +29,28 @@
 <body class="d-flex h-100 text-center text-bg-dark">
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-2 px-5">Registrazione</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end align-items-center">
-                <a class="nav-link fw-bold  px-3 active " aria-current="page" href="index.jsp">Home</a>
-                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/login">Login</a>
-                <a class="nav-link fw-bold py-1 px-3" href="${pageContext.request.contextPath}/Bacheca">Bacheca</a>
-            </nav>
-        </div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg" id="navbarTop" style="background-color: #171a1d">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="${pageContext.request.contextPath}/Bacheca">Storytelling</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/Muriel">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
     </header>
 
     <main class="w-100 align-items-center">

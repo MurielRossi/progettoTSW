@@ -11,17 +11,30 @@
     <link rel="stylesheet" href="./customcss/general.css"/>
 <body>
 
-<nav class="site-header py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-content-center text-center">
-        <a>
-            <img class="mb-4" src="./images/fairytale.png" alt="" width="30" height="30">
-        </a>
-        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
-        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/login">Login</a>
-        <a class="py-2 d-none d-md-inline-block" href="${pageContext.request.contextPath}/Bacheca">Visita Storytelling!</a>
+<header>
+    <nav class="navbar navbar-expand-lg" id="navbarTop">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="${pageContext.request.contextPath}/Bacheca">Storytelling</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="${pageContext.request.contextPath}/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="${pageContext.request.contextPath}/Bacheca">Visita Storytelling!</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-     </div>
- </nav>
+</header>
 
  <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
      <div class="col-md-5 p-lg-5 mx-auto my-5">
