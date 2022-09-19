@@ -52,7 +52,7 @@
 
 </header>
 
-    <c:if test="${not empty accessDenied}"> <!-- se l'utente non è loggato -->
+    <c:if test="${not empty accessDenied}"> <!-- se l'attributo "accessDenied è stato impostato-->
 
         <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
             <div id="failureLogin" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">

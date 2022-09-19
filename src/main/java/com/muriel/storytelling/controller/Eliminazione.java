@@ -23,7 +23,7 @@ public class Eliminazione extends HttpServlet
         Object obj = null;
         UserDAO userDao = new UserDAO();
         User user = null;
-        if(session == null || (obj = session.getAttribute("utente")) == null) //se l'utente non è loggato non può essere eliminato
+        if(session == null || (obj = session.getAttribute("user")) == null) //se l'utente non è loggato non può essere eliminato
         {
             resp.setStatus(403);
             throw new RuntimeException("L'utente non è in sessione!");
@@ -31,10 +31,14 @@ public class Eliminazione extends HttpServlet
         User utente = (User) obj;
         String email = req.getParameter("email");
 
+
         if(!utente.getEmail().equals(email))
         {
             resp.setStatus(400);
-            resp.getWriter().write("Email non corretta.");
+            req.setAttribute("emailDeleteDenied", "Utente non trovato!");
+            RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/eliminazione.jsp");
+            disp.forward(req, resp);
+            return;
         }
 
         try {
@@ -47,8 +51,9 @@ public class Eliminazione extends HttpServlet
         if(!(user.getPassword().equals(password)))
         {
             resp.setStatus(400);
-            resp.getWriter().write("Password non corretta.");
-
+            req.setAttribute("passwordDeleteDenied", "Utente non trovato!");
+            RequestDispatcher disp = req.getRequestDispatcher("WEB-INF/eliminazione.jsp");
+            disp.forward(req, resp);
             return;
         }
         else
@@ -58,8 +63,10 @@ public class Eliminazione extends HttpServlet
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            session.setAttribute("utente",null);
+            session.setAttribute("user ",null);
             session.setAttribute("eliminato",true);
+            session.invalidate();
+
             resp.sendRedirect("/Muriel/");
 
         }

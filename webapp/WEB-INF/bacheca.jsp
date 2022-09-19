@@ -200,7 +200,7 @@
                                  <div class="d-flex justify-content-between align-items-center">
                                      <div class="btn-group">
                                          <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendReaction(this.value)"> <c:out value = "${story.NReazioni}"> </c:out> ❤️</button>
-                                         <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendPost(this.value)">❤️</button>
+                                         <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendPost(this.value)">💾️</button>
                                          <%-- <%if((user.getIsAdmin()) || (user.getUsername().equals())){%>  --%>
                                          <c:if test="${(user.username == story.username) || (user.isAdmin == true)}"> <!--expression language(jstl) -->
                                             <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="deleteStory(this.value)">Elimina</button>
@@ -242,9 +242,10 @@
     <div class="navbar navbar-dark bg-dark fixed-bottom align-content-center nav-justified justify-content-between ">
         <div class="container" id = "scriviStoria">
             <table style="width: 90%">
-                <tbody style="width: 90%"><tr style="width:90%">
+                <tbody style="width: 100%">
+                <tr style="width:100%">
                     <td>
-                        <textarea email="contenuto" name="contenuto" rows="4" placeholder="Scrivi la tua storia..." style="width: 90%"></textarea>
+                        <textarea email="contenuto" name="contenuto" rows="4" placeholder="Scrivi la tua storia..." style="width: 100%"></textarea>
                         <span email="lenght-alert" class="alert-info " hidden="">Questa storia non ha il numero adeguato di caratteri!</span>
                     </td>
                     <td style="width:5%; height: 100%">

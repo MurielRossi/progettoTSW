@@ -54,13 +54,13 @@
     </header>
 
     <main class="w-100 align-items-center">
-        <form class="w-50 align-items-center " style="display: inline-block;" action="./registrazione" method="post">
+        <form class="w-50 align-items-center " style="display: inline-block;" action="./registrazione" method="post" onsubmit="return validateData()">
             <img class="mb-4" src="./images/fairytale.png" alt="" width="86" height="70">
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <h1 class="h3 mb-3 fw-normal">Registrati</h1>
 
             <div class=" py-2">
                 <input id="username" name="username" type="username" class="form-control" placeholder="nameexample19" onfocusout="existingUsername()" required>
-                <span id="username-alert" class="alert-info " hidden>Username già presente</span>
+                <span id="username-alert" class="alert-info " hidden>Username non inserita</span>
                 <br>
 
                 <label for="username">Username</label>
@@ -68,20 +68,20 @@
 
             <div class=" py-2">
                 <input id="email" name="email" type="email" class="form-control" email="floatingInput" placeholder="name@example.com" onfocusout="existingEmail()" required>
-                <span id="email-alert" class="alert-info " hidden>Email non corretta</span>
+                <span id="email-alert" class="alert-info " hidden>Email non inserita</span>
                 <br>
 
                 <label for="email">Email address</label>
             </div>
 
             <div class=" py-2">
-                <input id="password" name="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)">
+                <input id="password" name="password" type="password" class="form-control" email="floatingPassword" placeholder="Password" onfocusout="testPassword(this.value)" required>
                 <span id="password-alert" class="alert-info " hidden>Password non inserita</span>
 
                 <label for="password">Password</label>
             </div>
 
-            <button id="submit-registration" class="w-100 btn btn-lg btn-primary" type="submit" onclick="validateData()">Registrati</button>
+            <button id="submit-registration" class="w-100 btn btn-lg btn-primary" type="submit" disabled>Registrati</button>
             <p class="mt-5 mb-3 text-muted">Storytelling</p>
         </form>
     </main>
@@ -100,16 +100,21 @@
     let submitable3 = false;
 
 
-    function validateData(){
+    function validateData() {
         existingEmail();
         existingUsername();
         testPassword(document.getElementById());
 
-        if(submitable1 && submitable2 && submitable3)
+        if (submitable1 && submitable2 && submitable3)
+        {
+            submit.disabled = false;
             submitable = true;
-
-
-
+        }
+        else
+        {
+            submit.disabled = true;
+            submitable = false;
+        }
 
         return submitable;
     }
@@ -121,15 +126,17 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 400) {
                     emailalert.innerText = this.responseText;
-                    submit.disabled = true;
                     emailalert.hidden = false;
                     console.log("email rejected");
-                } else{
+            } else {
+                emailalert.hidden = true;
+                submitable1 = true;
+                if (submitable1 && submitable2 && submitable3) {
                     submit.disabled = false;
-                    emailalert.hidden = true;
-                    submitable1 = true;
-
+                    submitable = true;
                 }
+
+            }
         };
         xhttp.open("POST", "./verificaEmail", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -143,13 +150,15 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 400) {
                 usernamealert.innerText = this.responseText;
-                submit.disabled = true;
                 usernamealert.hidden = false;
                 console.log("username rejected");
             } else{
+                usernamealert.hidden = true;
+                submitable2 = true;
+                if (submitable1 && submitable2 && submitable3) {
                     submit.disabled = false;
-                    usernamealert.hidden = true;
-                    submitable2 = true;
+                    submitable = true;
+                }
             }
 
         };
@@ -161,6 +170,8 @@
     function testPassword(password){
         let regex=new RegExp("^(?=.*[a-z])(?=.*\\d)(?=.*[@#$%._-])(?=.*[A-Z]).{8,16}$");
         let passAlert= document.getElementById("password-alert");
+        let submit = document.getElementById("submit-registration");
+
         console.log(regex.test(password));
         if(!regex.test(password)){
             passAlert.innerText="La password non rispetta i parametri richiesti!"
@@ -169,6 +180,10 @@
         else{
             passAlert.hidden=true
             submitable3 = true;
+            if (submitable1 && submitable2 && submitable3) {
+                submit.disabled = false;
+                submitable = true;
+            }
         }
 
     }

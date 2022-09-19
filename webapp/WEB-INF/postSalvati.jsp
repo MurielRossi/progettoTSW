@@ -18,7 +18,7 @@
 
     <title>Bacheca</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/alb um/">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
@@ -84,34 +84,31 @@
 <header>
     <nav class="navbar navbar-expand-lg" id="navbarTop">
         <div class="container-fluid">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/Bacheca">Storytelling</a>
+            <a class="navbar-brand text-white" href="${pageContext.request.contextPath}/Bacheca">Storytelling</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Storie salvate</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/Bacheca">Home</a>
+                        <a class="nav-link text-white" href="/Muriel">Home</a>
                     </li>
 
                     <c:if test="${not empty user}"> <!-- se l'utente è loggato -->
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/logout">Disconnettimi</a>
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/logout">Disconnettimi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/eliminazione">Elimina il mio account</a>
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/eliminazione">Elimina il mio account</a>
                         </li>
                     </c:if>
 
                     <c:if test="${empty user}"> <!-- se l'utente non è loggato -->
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
+                            <a class="nav-link text-white" href="${pageContext.request.contextPath}/registrazione">Registrati</a>
                         </li>
                     </c:if>
                 </ul>
@@ -145,7 +142,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="sendReaction(this.value)"> <c:out value = "${story.NReazioni}"> </c:out> ❤️</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="unsendPost(this.value)">❤️</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" value="${story.id}" onclick="unsendPost(this.value)">💾</button>
                                     </div>
                                     <small class="text-muted"><c:out value = "${story.dataCreazione}"> </c:out></small>
                                 </div>
